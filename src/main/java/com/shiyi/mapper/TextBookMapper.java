@@ -14,4 +14,6 @@ public interface TextBookMapper {
 
     public List<TextBookDao> findAll();
 
+    public List<TextBookDao> findByType(String type);
+
 }

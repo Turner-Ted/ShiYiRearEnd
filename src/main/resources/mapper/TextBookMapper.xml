@@ -9,4 +9,9 @@
     <select id="findAll" resultType="com.shiyi.dao.TextBookDao">
         select * from textbook
     </select>
+
+    <select id="findByType" resultType="com.shiyi.dao.TextBookDao">
+        select * from textbook where type = #{type}
+    </select>
+
 </mapper>

@@ -3,6 +3,7 @@ package com.shiyi.controller;
 import com.google.gson.Gson;
 import com.shiyi.dao.CategoryDao;
 import com.shiyi.service.CategoryService;
+import com.shiyi.service.TextBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,14 +18,19 @@ public class CategoryController {
     @Autowired
     CategoryService service;
 
+    @Autowired
+    TextBookService textBookService;
+
     @RequestMapping(value = "/shows")
     public void getCategorys(HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");
         List<CategoryDao> daos = service.findAllCategory();
+        for (CategoryDao dao : daos){
+            dao.setList(textBookService.findByTypeTextBook(dao.getName()));
+        }
         Gson gson = new Gson();
         String jsonCategory = gson.toJson(daos);
         System.out.println("-----------"+jsonCategory);
         response.getWriter().println(jsonCategory);
     }
-
 }

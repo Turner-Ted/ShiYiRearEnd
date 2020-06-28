@@ -23,4 +23,9 @@ public class TextBookServiceImpl implements TextBookService {
     public List<TextBookDao> findAllTextBook() {
         return mapper.findAll();
     }
+
+    @Override
+    public List<TextBookDao> findByTypeTextBook(String type) {
+        return mapper.findByType(type);
+    }
 }

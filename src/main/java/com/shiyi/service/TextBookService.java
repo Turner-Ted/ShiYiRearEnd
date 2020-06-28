@@ -10,4 +10,6 @@ public interface TextBookService {
 
     public List<TextBookDao> findAllTextBook();
 
+    public List<TextBookDao> findByTypeTextBook(String type);
+
 }
