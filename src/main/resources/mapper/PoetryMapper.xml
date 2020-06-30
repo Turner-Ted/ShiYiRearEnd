@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiyi.mapper.PoetryMapper">
+
+    <select id="findById" resultType="com.shiyi.dao.PoetryDao">
+        select poetry.id, poetry.name, poetry.dynasty, author.name as authorName
+        from poetry, author where poetry.id = #{id} and poetry.authorId = author.id
+    </select>
+
+    <select id="fingByName" resultType="com.shiyi.dao.PoetryDao">
+    select poetry.id, poetry.name, poetry.dynasty, author.name as authorName
+        from poetry, author where poetry.name = #{name} and poetry.authorId = author.id
+    </select>
+
+    <select id="findByLabel" resultType="com.shiyi.dao.PoetryDao">
+        select poetry.id, poetry.name, poetry.dynasty, author.name as authorName
+    from poetry, author where poetry.authorId = author.id and
+    poetry.id in (select poetryId from label where name = #{label})
+    </select>
+
+    <select id="findByAuthorId" resultType="com.shiyi.dao.PoetryDao">
+        select poetry.id, poetry.name, poetry.dynasty, author.name as authorName
+        from poetry, author where poetry.authorId = #{id} and poetry.authorId = author.id
+    </select>
+
+    <select id="findByAuthorName" resultType="com.shiyi.dao.PoetryDao">
+        select poetry.id, poetry.name, poetry.dynasty, author.name as authorName
+        from poetry, author where author.name = #{name} and poetry.authorId = author.id
+    </select>
+
+
+</mapper>

@@ -1,17 +1,18 @@
 package com.shiyi.dao;
 
+//二级分类
 public class TextBookDao {
 
     String id;
     String name;
-    String img;
-    String type;
+    String imgPath;
+    String typeName;
 
-    public TextBookDao(String id, String name, String img, String type) {
+    public TextBookDao(String id, String name, String imgPath, String typeName) {
         this.id = id;
         this.name = name;
-        this.img = img;
-        this.type = type;
+        this.imgPath = imgPath;
+        this.typeName = typeName;
     }
 
     public String getId() {
@@ -30,19 +31,19 @@ public class TextBookDao {
         this.name = name;
     }
 
-    public String getImg() {
-        return img;
+    public String getImgPath() {
+        return imgPath;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 
-    public String getType() {
-        return type;
+    public String getTypeName() {
+        return typeName;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 }

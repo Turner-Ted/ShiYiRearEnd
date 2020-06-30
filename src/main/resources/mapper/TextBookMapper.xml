@@ -3,7 +3,7 @@
 <mapper namespace="com.shiyi.mapper.TextBookMapper">
 
     <insert id="save">
-        insert into textbook(id, name, img, type) values(#{dao.id}, #{dao.name}, #{dao.img}, #{dao.type})
+        insert into textbook(id, name, img, type) values(#{dao.id}, #{dao.name}, #{dao.imgPath}, #{dao.typeName})
     </insert>
 
     <select id="findAll" resultType="com.shiyi.dao.TextBookDao">
@@ -11,7 +11,7 @@
     </select>
 
     <select id="findByType" resultType="com.shiyi.dao.TextBookDao">
-        select * from textbook where type = #{type}
+        select * from textbook where typeName = #{typeName}
     </select>
 
 </mapper>

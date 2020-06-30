@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiyi.mapper.VerseMapper">
+
+    <select id="findById" resultType="com.shiyi.dao.VerseDao">
+        select verse.*, author.name as authorName  from verse, author where verse.id = #{id} and authorId = author.id
+    </select>
+
+    <select id="findByPoetryId" resultType="com.shiyi.dao.VerseDao">
+        select * from verse where poetryId = #{id}
+    </select>
+
+    <select id="findByLabel" resultType="com.shiyi.dao.VerseDao">
+        select verse.*, author.name as authorName  from verse, author where authorId = author.id
+        and verse.id in (select verseId from label where name = #{label})
+    </select>
+
+    <select id="findByAuthorId" resultType="com.shiyi.dao.VerseDao">
+        select verse.*, author.name as authorName  from verse, author where verse.authorId = #{id} and authorId = author.id
+    </select>
+
+    <select id="findByAuthorName" resultType="com.shiyi.dao.VerseDao">
+        select verse.*, author.name as authorName  from verse, author where author.name = #{name} and authorId = author.id
+    </select>
+
+    <select id="findByClassic" resultType="com.shiyi.dao.VerseDao">
+         select verse.*, author.name as authorName  from verse, author where verse.classic = true and authorId = author.id
+    </select>
+
+</mapper>
