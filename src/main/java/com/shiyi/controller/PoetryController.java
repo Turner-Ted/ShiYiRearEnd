@@ -41,10 +41,10 @@ public class PoetryController {
         if (id != null){
             dao = poetryService.findByIdPoetry(id);
             if (dao != null){
-                dao.setVerseDaos(verseService.findByPoetryIdVerse(dao.getId()));
-                for (VerseDao v : dao.getVerseDaos()){
+                dao.setVerses(verseService.findByPoetryIdVerse(dao.getId()));
+                for (VerseDao v : dao.getVerses()){
                     if (v.isClassic()){
-                        dao.getClassic().add(v);
+                        dao.getClassics().add(v);
                     }
                 }
             }
@@ -52,6 +52,15 @@ public class PoetryController {
             daos = poetryService.fingByNamePoetry(name);
         }else if (label != null){
             daos = poetryService.findByLabelPoetry(label);
+            if (daos != null){
+                for (PoetryDao d : daos){
+                    VerseDao verseDao = verseService.findByIdVerse(d.getId()+"00");
+                    if (verseDao != null){
+                        d.setVerse(verseDao.getText());
+                    }
+
+                }
+            }
         }else if (authorId != null){
             daos = poetryService.findByAuthorIdPoetry(authorId);
         }else if (authorName != null){

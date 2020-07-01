@@ -10,11 +10,13 @@ public class PoetryDao {
     private String name;
     private String dynasty;
     private String authorName;
+    private String verse;
 
-    private List<LabelDao> labelDaos;
-    private List<VerseDao> verseDaos;
-    private List<AppreciationDao> appreciationDaos;
-    private List<VerseDao> classic = new ArrayList<>();
+    private List<LabelDao> labels;
+    private List<VerseDao> verses;
+    private List<AppreciationDao> appreciations;
+    private List<VerseDao> classics = new ArrayList<>();
+    private List<CommentDao> commentDaos;
 
     public String getId() {
         return id;
@@ -48,35 +50,51 @@ public class PoetryDao {
         this.authorName = authorName;
     }
 
-    public List<LabelDao> getLabelDaos() {
-        return labelDaos;
+    public String getVerse() {
+        return verse;
     }
 
-    public void setLabelDaos(List<LabelDao> labelDaos) {
-        this.labelDaos = labelDaos;
+    public void setVerse(String verse) {
+        this.verse = verse;
     }
 
-    public List<VerseDao> getVerseDaos() {
-        return verseDaos;
+    public List<LabelDao> getLabels() {
+        return labels;
     }
 
-    public void setVerseDaos(List<VerseDao> verseDaos) {
-        this.verseDaos = verseDaos;
+    public void setLabels(List<LabelDao> labels) {
+        this.labels = labels;
     }
 
-    public List<AppreciationDao> getAppreciationDaos() {
-        return appreciationDaos;
+    public List<VerseDao> getVerses() {
+        return verses;
     }
 
-    public void setAppreciationDaos(List<AppreciationDao> appreciationDaos) {
-        this.appreciationDaos = appreciationDaos;
+    public void setVerses(List<VerseDao> verses) {
+        this.verses = verses;
     }
 
-    public List<VerseDao> getClassic() {
-        return classic;
+    public List<AppreciationDao> getAppreciations() {
+        return appreciations;
     }
 
-    public void setClassic(List<VerseDao> classic) {
-        this.classic = classic;
+    public void setAppreciations(List<AppreciationDao> appreciations) {
+        this.appreciations = appreciations;
+    }
+
+    public List<VerseDao> getClassics() {
+        return classics;
+    }
+
+    public void setClassics(List<VerseDao> classics) {
+        this.classics = classics;
+    }
+
+    public List<CommentDao> getCommentDaos() {
+        return commentDaos;
+    }
+
+    public void setCommentDaos(List<CommentDao> commentDaos) {
+        this.commentDaos = commentDaos;
     }
 }
