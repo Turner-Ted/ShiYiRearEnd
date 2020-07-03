@@ -25,7 +25,6 @@ public class VerseController {
         response.setContentType("text/html;charset=utf-8");
         VerseDao dao = null;
         List<VerseDao> daos = null;
-        String jsonString = null;
 
         String id = request.getParameter(UrlLabel.ID);
         String poetryId = request.getParameter(UrlLabel.POETRYID);
@@ -35,34 +34,42 @@ public class VerseController {
 
         if (id != null){
             dao = verseService.findByIdVerse(id);
+            id = null;
         } else if (poetryId != null){
             daos = verseService.findByPoetryIdVerse(poetryId);
+            poetryId = null;
         } else if (label != null){
             daos = verseService.findByLabelVerse(label);
+            label = null;
         } else if (authorId != null){
             daos = verseService.findByAuthorIdVerse(authorId);
+            authorId = null;
         } else if (authorName != null){
             daos = verseService.findByAuthorNameVerse(authorName);
+            authorName = null;
         } else {
 
         }
 
         if (dao != null){
-            jsonString = new Gson().toJson(dao);
+            System.out.println("-----------"+dao.toString());
+            response.getWriter().println(new Gson().toJson(dao));
         } else if (daos != null){
-            jsonString = new Gson().toJson(daos);
+            System.out.println("-----------"+daos.toString());
+            response.getWriter().println(new Gson().toJson(daos));
         }
 
-        System.out.println("-----------"+jsonString);
-        response.getWriter().println(jsonString);
+
     }
 
     @RequestMapping(value = "classic")
     public void getClassicVerse(HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");
         List<VerseDao> daos = verseService.findByClassicVerse();
-        String jsonString = new Gson().toJson(daos);
-        System.out.println("-----------"+jsonString);
-        response.getWriter().println(jsonString);
+        if (daos != null){
+            String jsonString = new Gson().toJson(daos);
+            System.out.println("-----------"+jsonString);
+            response.getWriter().println(jsonString);
+        }
     }
 }

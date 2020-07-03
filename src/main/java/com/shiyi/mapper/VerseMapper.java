@@ -16,6 +16,8 @@ public interface VerseMapper {
 
     public List<VerseDao> findByAuthorName(String name);
 
-    public List<VerseDao> findByClassic();
+    public List<VerseDao> findClassic();
+
+    public List<VerseDao> findClassicByPoetryId(String id);
 
 }

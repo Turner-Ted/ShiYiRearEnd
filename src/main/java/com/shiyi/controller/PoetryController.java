@@ -2,7 +2,6 @@ package com.shiyi.controller;
 
 import com.google.gson.Gson;
 import com.shiyi.dao.PoetryDao;
-import com.shiyi.dao.VerseDao;
 import com.shiyi.service.PoetryService;
 import com.shiyi.service.VerseService;
 import com.shiyi.utils.UrlLabel;
@@ -30,7 +29,6 @@ public class PoetryController {
         response.setContentType("text/html;charset=utf-8");
         PoetryDao dao = null;
         List<PoetryDao> daos = null;
-        String jsonString = null;
 
         String id = request.getParameter(UrlLabel.ID);
         String name = request.getParameter(UrlLabel.NAME);
@@ -40,43 +38,30 @@ public class PoetryController {
 
         if (id != null){
             dao = poetryService.findByIdPoetry(id);
-            if (dao != null){
-                dao.setVerses(verseService.findByPoetryIdVerse(dao.getId()));
-                for (VerseDao v : dao.getVerses()){
-                    if (v.isClassic()){
-                        dao.getClassics().add(v);
-                    }
-                }
-            }
+            id = null;
         }else if (name != null){
             daos = poetryService.fingByNamePoetry(name);
+            name = null;
         }else if (label != null){
             daos = poetryService.findByLabelPoetry(label);
-            if (daos != null){
-                for (PoetryDao d : daos){
-                    VerseDao verseDao = verseService.findByIdVerse(d.getId()+"00");
-                    if (verseDao != null){
-                        d.setVerse(verseDao.getText());
-                    }
-
-                }
-            }
+            label = null;
         }else if (authorId != null){
             daos = poetryService.findByAuthorIdPoetry(authorId);
+            authorId = null;
         }else if (authorName != null){
             daos = poetryService.findByAuthorNamePoetry(authorName);
+            authorName = null;
         }else {
 
         }
 
         if (dao != null){
-            jsonString = new Gson().toJson(dao);
+            System.out.println("返回数据："+dao.toString());
+            response.getWriter().println(new Gson().toJson(dao));
         } else if (daos != null){
-            jsonString = new Gson().toJson(daos);
+            System.out.println("返回数据："+daos.toString());
+            response.getWriter().println(new Gson().toJson(daos));
         }
-
-        System.out.println("-----------"+jsonString);
-        response.getWriter().println(jsonString);
 
     }
 

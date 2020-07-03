@@ -18,4 +18,6 @@ public interface VerseService {
 
     public List<VerseDao> findByClassicVerse();
 
+    public List<VerseDao> findClassicByPoetryIdVerse(String id);
+
 }

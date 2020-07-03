@@ -11,12 +11,13 @@ public class PoetryDao {
     private String dynasty;
     private String authorName;
     private String verse;
+    private AuthorDao author;
 
     private List<LabelDao> labels;
     private List<VerseDao> verses;
     private List<AppreciationDao> appreciations;
     private List<VerseDao> classics = new ArrayList<>();
-    private List<CommentDao> commentDaos;
+    private List<CommentDao> comments;
 
     public String getId() {
         return id;
@@ -58,6 +59,14 @@ public class PoetryDao {
         this.verse = verse;
     }
 
+    public AuthorDao getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(AuthorDao author) {
+        this.author = author;
+    }
+
     public List<LabelDao> getLabels() {
         return labels;
     }
@@ -90,11 +99,28 @@ public class PoetryDao {
         this.classics = classics;
     }
 
-    public List<CommentDao> getCommentDaos() {
-        return commentDaos;
+    public List<CommentDao> getComments() {
+        return comments;
     }
 
-    public void setCommentDaos(List<CommentDao> commentDaos) {
-        this.commentDaos = commentDaos;
+    public void setComments(List<CommentDao> comments) {
+        this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        return "PoetryDao{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", dynasty='" + dynasty + '\'' +
+                ", authorName='" + authorName + '\'' +
+                ", verse='" + verse + '\'' +
+                ", author=" + author +
+                ", labels=" + labels +
+                ", verses=" + verses +
+                ", appreciations=" + appreciations +
+                ", classics=" + classics +
+                ", commentDaos=" + comments +
+                '}';
     }
 }

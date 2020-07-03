@@ -41,6 +41,11 @@ public class VerseServiceImpl implements VerseService {
 
     @Override
     public List<VerseDao> findByClassicVerse() {
-        return mapper.findByClassic();
+        return mapper.findClassic();
+    }
+
+    @Override
+    public List<VerseDao> findClassicByPoetryIdVerse(String id) {
+        return mapper.findClassicByPoetryId(id);
     }
 }

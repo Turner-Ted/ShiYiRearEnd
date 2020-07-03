@@ -23,8 +23,13 @@
         select verse.*, author.name as authorName  from verse, author where author.name = #{name} and authorId = author.id
     </select>
 
-    <select id="findByClassic" resultType="com.shiyi.dao.VerseDao">
+    <select id="findClassic" resultType="com.shiyi.dao.VerseDao">
          select verse.*, author.name as authorName  from verse, author where verse.classic = true and authorId = author.id
+    </select>
+
+    <select id="findClassicByPoetryId" resultType="com.shiyi.dao.VerseDao">
+        select verse.*, author.name as authorName  from verse, author
+        where verse.classic = true and authorId = author.id and poetryId = #{id}
     </select>
 
 </mapper>
