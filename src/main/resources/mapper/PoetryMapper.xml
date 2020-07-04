@@ -3,7 +3,7 @@
 <mapper namespace="com.shiyi.mapper.PoetryMapper">
 
     <select id="findById" resultType="com.shiyi.dao.PoetryDao">
-        select poetry.id, poetry.name, poetry.dynasty, author.name as authorName
+        select poetry.*, author.name as authorName
         from poetry, author where poetry.id = #{id} and poetry.authorId = author.id
     </select>
 

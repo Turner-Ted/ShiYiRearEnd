@@ -1,9 +1,7 @@
 package com.shiyi.service.impl;
 
 import com.shiyi.dao.PoetryDao;
-import com.shiyi.mapper.CommentMapper;
-import com.shiyi.mapper.PoetryMapper;
-import com.shiyi.mapper.VerseMapper;
+import com.shiyi.mapper.*;
 import com.shiyi.service.PoetryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,16 +20,22 @@ public class PoetryServiceImpl implements PoetryService {
     @Autowired
     CommentMapper commentMapper;
 
+    @Autowired
+    AppreciationMapper appreciationMapper;
+
+    @Autowired
+    AuthorMapper authorMapper;
+
     @Override
     public PoetryDao findByIdPoetry(String id) {
         PoetryDao poetry;
         poetry = mapper.findById(id);
         if (poetry!=null){
             poetry.setVerses(verseMapper.findByPoetryId(id));
-
+            poetry.setAuthor(authorMapper.getById(poetry.getAuthorId()));
             poetry.setClassics(verseMapper.findClassicByPoetryId(id));
             poetry.setComments(commentMapper.getByPoetryId(id));
-
+            poetry.setAppreciations(appreciationMapper.getByPoetryId(id));
         }
         return poetry;
     }

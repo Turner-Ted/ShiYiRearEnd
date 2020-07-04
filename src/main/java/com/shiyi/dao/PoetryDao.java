@@ -9,6 +9,7 @@ public class PoetryDao {
     private String id;
     private String name;
     private String dynasty;
+    private String authorId;
     private String authorName;
     private String verse;
     private AuthorDao author;
@@ -41,6 +42,14 @@ public class PoetryDao {
 
     public void setDynasty(String dynasty) {
         this.dynasty = dynasty;
+    }
+
+    public String getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
     }
 
     public String getAuthorName() {
@@ -113,6 +122,7 @@ public class PoetryDao {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", dynasty='" + dynasty + '\'' +
+                ", authorId='" + authorId + '\'' +
                 ", authorName='" + authorName + '\'' +
                 ", verse='" + verse + '\'' +
                 ", author=" + author +
@@ -120,7 +130,7 @@ public class PoetryDao {
                 ", verses=" + verses +
                 ", appreciations=" + appreciations +
                 ", classics=" + classics +
-                ", commentDaos=" + comments +
+                ", comments=" + comments +
                 '}';
     }
 }
