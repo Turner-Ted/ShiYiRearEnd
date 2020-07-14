@@ -14,7 +14,7 @@ public class PoetryDao {
     private String verse;
     private AuthorDao author;
 
-    private List<LabelDao> labels;
+    private List<String> labels;
     private List<VerseDao> verses;
     private List<AppreciationDao> appreciations;
     private List<VerseDao> classics = new ArrayList<>();
@@ -76,11 +76,11 @@ public class PoetryDao {
         this.author = author;
     }
 
-    public List<LabelDao> getLabels() {
+    public List<String> getLabels() {
         return labels;
     }
 
-    public void setLabels(List<LabelDao> labels) {
+    public void setLabels(List<String> labels) {
         this.labels = labels;
     }
 

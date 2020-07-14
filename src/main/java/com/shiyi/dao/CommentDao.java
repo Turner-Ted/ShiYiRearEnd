@@ -39,4 +39,14 @@ public class CommentDao {
     public void setText(String text) {
         this.text = text;
     }
+
+    @Override
+    public String toString() {
+        return "CommentDao{" +
+                "series='" + series + '\'' +
+                ", verseId='" + verseId + '\'' +
+                ", field='" + field + '\'' +
+                ", text='" + text + '\'' +
+                '}';
+    }
 }

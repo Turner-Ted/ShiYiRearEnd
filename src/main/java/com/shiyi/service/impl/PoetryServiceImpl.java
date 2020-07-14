@@ -1,12 +1,15 @@
 package com.shiyi.service.impl;
 
+import com.shiyi.dao.AppreciationDao;
 import com.shiyi.dao.PoetryDao;
+import com.shiyi.dao.VerseDao;
 import com.shiyi.mapper.*;
 import com.shiyi.service.PoetryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class PoetryServiceImpl implements PoetryService {
@@ -26,6 +29,89 @@ public class PoetryServiceImpl implements PoetryService {
     @Autowired
     AuthorMapper authorMapper;
 
+    @Autowired
+    VerseServiceImpl verseService;
+
+    @Autowired
+    DynastyMapper dynastyMapper;
+
+    @Autowired
+    LabelMapper labelMapper;
+
+    @Override
+    public void savePoetry(PoetryDao poetry) {
+
+        if (poetry == null || mapper.isPoetry(poetry.getName(), poetry.getDynasty())){
+            return;
+        }
+
+        String id;
+        Boolean idFlag;
+        String aId = authorMapper.getIdBy(poetry.getAuthorName(), poetry.getDynasty());
+        System.out.println("aId:" + aId);
+        String dId = dynastyMapper.getIdByName(poetry.getDynasty());
+        System.out.println("dId:" + dId);
+        if (dId == null){
+            dId = "9";
+        }
+        System.out.println("dId:" + dId);
+
+        do {
+            id = 4 + dId + String.format("%03d", new Random().nextInt(999));
+            idFlag = mapper.isById(id);
+            System.out.println("idFlag:" + idFlag);
+        }while (idFlag != null);
+
+        System.out.println("id:" + id);
+        if (aId == null){
+            do {
+                aId = dId + String.format("%02d", new Random().nextInt(99));
+                idFlag = authorMapper.isById(aId);
+            }while (idFlag != null);
+            authorMapper.save(poetry.getAuthor());
+        }
+        System.out.println("aId:" + aId);
+
+        poetry.setId(id);
+        poetry.setAuthorId(aId);
+        poetry.getAuthor().setId(aId);
+
+        mapper.save(poetry);
+        System.out.println("p:" + poetry.toString());
+
+        if (poetry.getAppreciations()!=null){
+            for (AppreciationDao a : poetry.getAppreciations()){
+                a.setPoetryId(id);
+            System.out.println("a:" + a.toString());
+                appreciationMapper.save(a);
+            }
+        }
+
+        if (poetry.getLabels()!=null){
+            for (String l : poetry.getLabels()){
+           System.out.println("l:" + l);
+                labelMapper.saveByPoetry(l, poetry.getId());
+            }
+        }
+
+        if (poetry.getVerses()!=null){
+            for (VerseDao v:poetry.getVerses()){
+                v.setAuthorId(aId);
+                v.setPoetryId(id);
+                v.setId(id+v.getSeries());
+                v.setAuthorName(poetry.getAuthorName());
+            System.out.println("v:" + v.toString());
+                verseService.save(v);
+            }
+        }
+
+    }
+
+    @Override
+    public Boolean isByIdPoetry(String id) {
+        return mapper.isById(id);
+    }
+
     @Override
     public PoetryDao findByIdPoetry(String id) {
         PoetryDao poetry;
@@ -36,6 +122,8 @@ public class PoetryServiceImpl implements PoetryService {
             poetry.setClassics(verseMapper.findClassicByPoetryId(id));
             poetry.setComments(commentMapper.getByPoetryId(id));
             poetry.setAppreciations(appreciationMapper.getByPoetryId(id));
+            poetry.setLabels(labelMapper.findLabelById(id));
+
         }
         return poetry;
     }
@@ -43,7 +131,7 @@ public class PoetryServiceImpl implements PoetryService {
     @Override
     public List<PoetryDao> fingByNamePoetry(String name) {
         List<PoetryDao> poetrys;
-        poetrys = mapper.fingByName(name);
+        poetrys = mapper.findByName(name);
         getFristVerse(poetrys);
         return poetrys;
     }

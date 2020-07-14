@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shiyi.mapper.AuthorMapper">
+    <insert id="save">
+        insert into author(id, name, dynasty, summary)
+        values (#{author.id}, #{author.name}, #{author.dunasty}, #{author.summary})
+    </insert>
 
     <select id="getById" resultType="com.shiyi.dao.AuthorDao">
         select * from author where id = #{id}
+    </select>
+
+    <select id="isById" resultType="java.lang.Boolean">
+        select id from author where id = #{id}
+    </select>
+
+    <select id="getIdBy" resultType="java.lang.String">
+        select id from author where name = #{param1} and dynasty = #{param2}
     </select>
 
 </mapper>

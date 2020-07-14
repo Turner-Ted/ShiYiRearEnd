@@ -6,6 +6,10 @@ import java.util.List;
 
 public interface PoetryService {
 
+    public void savePoetry(PoetryDao poetry);
+
+    public Boolean isByIdPoetry(String id);
+
     public PoetryDao findByIdPoetry(String id);
 
     public List<PoetryDao> fingByNamePoetry(String name);

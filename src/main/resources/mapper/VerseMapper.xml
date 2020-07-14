@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shiyi.mapper.VerseMapper">
 
+    <insert id="save" parameterType="com.shiyi.dao.VerseDao">
+        insert into verse(id, series, poetryId, authorId, text, translation)
+        values (#{id}, #{series}, #{poetryId}, #{authorId}, #{text}, #{translation})
+    </insert>
+
+    <insert id="save2">
+        insert into verse(id, series, poetryId,  authorId, text, translation)
+        values (#{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6})
+    </insert>
+
+
     <select id="findById" resultType="com.shiyi.dao.VerseDao">
         select verse.*, author.name as authorName  from verse, author where verse.id = #{id} and authorId = author.id
     </select>

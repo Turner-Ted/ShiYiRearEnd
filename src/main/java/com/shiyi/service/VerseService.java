@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface VerseService {
 
+    public void save(VerseDao verse);
+
     public VerseDao findByIdVerse(String id);
 
     public List<VerseDao> findByPoetryIdVerse(String id);

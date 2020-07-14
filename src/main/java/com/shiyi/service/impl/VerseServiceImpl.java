@@ -1,6 +1,8 @@
 package com.shiyi.service.impl;
 
+import com.shiyi.dao.CommentDao;
 import com.shiyi.dao.VerseDao;
+import com.shiyi.mapper.CommentMapper;
 import com.shiyi.mapper.VerseMapper;
 import com.shiyi.service.VerseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,24 @@ public class VerseServiceImpl implements VerseService {
 
     @Autowired
     VerseMapper mapper;
+
+    @Autowired
+    CommentMapper commentMapper;
+
+    @Override
+    public void save(VerseDao verse) {
+        if (verse == null){
+            return;
+        }
+        mapper.save(verse);
+        if (verse.getComments() == null){
+            return;
+        }
+        for (CommentDao c : verse.getComments()){
+            c.setVerseId(verse.getId());
+            commentMapper.save(c);
+        }
+    }
 
     @Override
     public VerseDao findByIdVerse(String id) {

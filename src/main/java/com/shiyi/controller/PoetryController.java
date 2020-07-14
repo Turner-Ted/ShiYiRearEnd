@@ -7,7 +7,10 @@ import com.shiyi.service.VerseService;
 import com.shiyi.utils.UrlLabel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,6 +41,7 @@ public class PoetryController {
 
         if (id != null){
             dao = poetryService.findByIdPoetry(id);
+//            poetryService.savePoetry(dao);
             id = null;
         }else if (name != null){
             daos = poetryService.fingByNamePoetry(name);
@@ -63,6 +67,16 @@ public class PoetryController {
             response.getWriter().println(new Gson().toJson(daos));
         }
 
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "save", method = RequestMethod.POST)
+    public void savePoetry(@RequestBody PoetryDao poetry, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        response.setContentType("text/html;charset=utf-8");
+        System.out.println("post:" + poetry.toString());
+        poetryService.savePoetry(poetry);
+
+        response.getWriter().println("true");
     }
 
 }

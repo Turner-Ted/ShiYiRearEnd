@@ -39,4 +39,14 @@ public class AuthorDao {
     public void setSummary(String summary) {
         this.summary = summary;
     }
+
+    @Override
+    public String toString() {
+        return "AuthorDao{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", dynasty='" + dynasty + '\'' +
+                ", summary='" + summary + '\'' +
+                '}';
+    }
 }

@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shiyi.mapper.CommentMapper">
 
+    <insert id="save" parameterType="com.shiyi.dao.CommentDao">
+        insert into comment(series, verseId, field, text)
+        values (#{series}, #{verseId}, #{field}, #{text})
+    </insert>
+
     <select id="getByPoetryId" resultType="com.shiyi.dao.CommentDao">
         select * from comment where verseId in (select id from verse where poetryId = #{id})
     </select>

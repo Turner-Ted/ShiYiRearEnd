@@ -15,6 +15,7 @@ public class VerseDao {
     private boolean classic;
 
     private List<LabelDao> labelDaos;
+    private List<CommentDao> comments;
 
     public String getId() {
         return id;
@@ -88,6 +89,14 @@ public class VerseDao {
         this.classic = classic;
     }
 
+    public List<CommentDao> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentDao> comments) {
+        this.comments = comments;
+    }
+
     @Override
     public String toString() {
         return "VerseDao{" +
@@ -100,6 +109,7 @@ public class VerseDao {
                 ", translation='" + translation + '\'' +
                 ", classic=" + classic +
                 ", labelDaos=" + labelDaos +
+                ", comments=" + comments +
                 '}';
     }
 }
