@@ -6,11 +6,6 @@
         values (#{id}, #{name}, #{dynasty}, #{authorId})
     </insert>
 
-    <insert id="save2">
-        insert into poetry(id, name, dynasty, authorId)
-        values (#{param1}, #{param2}, #{param3}, #{param4})
-    </insert>
-
     <select id="findById" resultType="com.shiyi.dao.PoetryDao">
         select poetry.*, author.name as authorName
         from poetry, author where poetry.id = #{id} and poetry.authorId = author.id
@@ -44,5 +39,9 @@
         select id from poetry where name = #{param1} and dynasty = #{param2}
     </select>
 
+    <select id="findAll" resultType="com.shiyi.dao.PoetryDao">
+        select poetry.id, poetry.name, poetry.dynasty, author.name as authorName
+        from poetry, author where poetry.authorId = author.id
+    </select>
 
 </mapper>

@@ -108,6 +108,14 @@ public class PoetryServiceImpl implements PoetryService {
     }
 
     @Override
+    public List<PoetryDao> findAllPoetry() {
+        List<PoetryDao> poetrys;
+        poetrys = mapper.findAll();
+        getFristVerse(poetrys);
+        return poetrys;
+    }
+
+    @Override
     public Boolean isByIdPoetry(String id) {
         return mapper.isById(id);
     }

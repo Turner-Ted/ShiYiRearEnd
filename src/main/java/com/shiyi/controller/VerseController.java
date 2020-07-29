@@ -20,6 +20,11 @@ public class VerseController {
     @Autowired
     VerseService verseService;
 
+    @RequestMapping(value = "/shows")
+    public void getVerseAll(HttpServletResponse response){
+        response.setContentType("text/html;charset=utf-8");
+    }
+
     @RequestMapping(value = "/seek")
     public void getVerse(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");

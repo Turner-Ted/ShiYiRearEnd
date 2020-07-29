@@ -17,5 +17,8 @@
     <select id="getIdBy" resultType="java.lang.String">
         select id from author where name = #{param1} and dynasty = #{param2}
     </select>
+    <select id="getAll" resultType="com.shiyi.dao.AuthorDao">
+        select * from author
+    </select>
 
 </mapper>

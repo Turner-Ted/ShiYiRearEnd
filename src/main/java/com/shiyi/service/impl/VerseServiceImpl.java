@@ -35,6 +35,11 @@ public class VerseServiceImpl implements VerseService {
     }
 
     @Override
+    public List<VerseDao> findAllVerse() {
+        return mapper.findAll();
+    }
+
+    @Override
     public VerseDao findByIdVerse(String id) {
         return mapper.findById(id);
     }

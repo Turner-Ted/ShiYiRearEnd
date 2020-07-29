@@ -8,6 +8,8 @@ public interface PoetryService {
 
     public void savePoetry(PoetryDao poetry);
 
+    public List<PoetryDao> findAllPoetry();
+
     public Boolean isByIdPoetry(String id);
 
     public PoetryDao findByIdPoetry(String id);

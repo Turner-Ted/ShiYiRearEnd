@@ -7,12 +7,6 @@
         values (#{id}, #{series}, #{poetryId}, #{authorId}, #{text}, #{translation})
     </insert>
 
-    <insert id="save2">
-        insert into verse(id, series, poetryId,  authorId, text, translation)
-        values (#{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6})
-    </insert>
-
-
     <select id="findById" resultType="com.shiyi.dao.VerseDao">
         select verse.*, author.name as authorName  from verse, author where verse.id = #{id} and authorId = author.id
     </select>
@@ -41,6 +35,10 @@
     <select id="findClassicByPoetryId" resultType="com.shiyi.dao.VerseDao">
         select verse.*, author.name as authorName  from verse, author
         where verse.classic = true and authorId = author.id and poetryId = #{id}
+    </select>
+    <select id="findAll" resultType="com.shiyi.dao.VerseDao">
+        select verse.*, author.name as authorName  from verse, author
+        where  authorId = author.id
     </select>
 
 </mapper>

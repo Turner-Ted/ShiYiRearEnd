@@ -8,6 +8,8 @@ public interface VerseService {
 
     public void save(VerseDao verse);
 
+    public List<VerseDao> findAllVerse();
+
     public VerseDao findByIdVerse(String id);
 
     public List<VerseDao> findByPoetryIdVerse(String id);

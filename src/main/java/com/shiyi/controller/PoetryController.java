@@ -27,6 +27,12 @@ public class PoetryController {
     @Autowired
     VerseService verseService;
 
+    @RequestMapping(value = "shows")
+    public void getPoetryAll(HttpServletResponse response) throws IOException {
+        response.setContentType("text/html;charset=utf-8");
+        response.getWriter().println(new Gson().toJson(poetryService.findAllPoetry()));
+    }
+
     @RequestMapping("/seek")
     public void getPoetry(HttpServletResponse response, HttpServletRequest request) throws IOException {
         response.setContentType("text/html;charset=utf-8");

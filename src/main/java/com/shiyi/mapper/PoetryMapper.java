@@ -8,7 +8,7 @@ public interface PoetryMapper {
 
     public void save(PoetryDao poetry);
 
-    public void save2(String id, String name, String dynasty, String authorId);
+    public List<PoetryDao> findAll();
 
     public Boolean isById(String id);
 

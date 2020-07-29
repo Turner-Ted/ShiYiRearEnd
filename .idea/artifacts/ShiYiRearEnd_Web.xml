@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ShiYiRearEnd:Web">
+    <output-path>$PROJECT_DIR$/out/artifacts/ShiYiRearEnd_Web</output-path>
+    <root id="archive" name="ShiYiRearEnd_Web.war">
+      <element id="artifact" artifact-name="ShiYiRearEnd:Web exploded" />
+    </root>
+  </artifact>
+</component>
