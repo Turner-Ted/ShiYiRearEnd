@@ -12,7 +12,7 @@ public interface AuthorMapper {
 
     public Boolean isById(String id);
 
-    public String getIdBy(String name, String dynasty);
+    public String getIdBy(String name);
 
     public AuthorDao getById(String id);
 

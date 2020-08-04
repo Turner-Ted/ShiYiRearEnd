@@ -12,7 +12,7 @@ public interface AuthorService {
 
     public Boolean isAuthorById(String id);
 
-    public String getAuthorIdBy(String name, String dynasty);
+    public String getAuthorIdBy(String name);
 
     public AuthorDao getAuthorById(String id);
 

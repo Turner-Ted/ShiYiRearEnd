@@ -41,13 +41,15 @@ public class PoetryServiceImpl implements PoetryService {
     @Override
     public void savePoetry(PoetryDao poetry) {
 
-        if (poetry == null || mapper.isPoetry(poetry.getName(), poetry.getDynasty())){
+        if (poetry == null || mapper.isPoetry(poetry.getName(), poetry.getDynasty()) != null){
             return;
         }
 
+        System.out.println(poetry.toString());
+
         String id;
         Boolean idFlag;
-        String aId = authorMapper.getIdBy(poetry.getAuthorName(), poetry.getDynasty());
+        String aId = authorMapper.getIdBy(poetry.getAuthorName());
         System.out.println("aId:" + aId);
         String dId = dynastyMapper.getIdByName(poetry.getDynasty());
         System.out.println("dId:" + dId);
@@ -68,6 +70,7 @@ public class PoetryServiceImpl implements PoetryService {
                 aId = dId + String.format("%02d", new Random().nextInt(99));
                 idFlag = authorMapper.isById(aId);
             }while (idFlag != null);
+            poetry.getAuthor().setId(aId);
             authorMapper.save(poetry.getAuthor());
         }
         System.out.println("aId:" + aId);

@@ -30,8 +30,8 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public String getAuthorIdBy(String name, String dynasty) {
-        return mapper.getIdBy(name, dynasty);
+    public String getAuthorIdBy(String name) {
+        return mapper.getIdBy(name);
     }
 
     @Override
