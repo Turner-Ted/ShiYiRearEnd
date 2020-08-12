@@ -19,7 +19,7 @@
     <select id="findByLabel" resultType="com.shiyi.dao.PoetryDao">
         select poetry.id, poetry.name, poetry.dynasty, author.name as authorName
     from poetry, author where poetry.authorId = author.id and
-    poetry.id in (select poetryId from label where name = #{label})
+    poetry.id in (select poetryId from label where name like #{label})
     </select>
 
     <select id="findByAuthorId" resultType="com.shiyi.dao.PoetryDao">

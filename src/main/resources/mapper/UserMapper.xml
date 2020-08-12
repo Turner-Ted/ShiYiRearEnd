@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiyi.mapper.UserMapper">
+
+    <insert id="saveAll" parameterType="com.shiyi.dao.UserDao">
+        insert into user(id, phone, name, age, info, avatar, pwd)
+        values (#{id}, #{phone}, #{name}, #{age}, #{info}, #{avatar}, #{pwd})
+    </insert>
+
+    <insert id="saveByRegister" parameterType="com.shiyi.dao.UserDao">
+        insert into user (id, phone, name, age, pwd)
+        values (#{id}, #{phone}, #{name}, #{age}, #{pwd});
+    </insert>
+
+    <update id="updateByAvatar">
+        update user set avatar = #{param1} where id = #{param2}
+    </update>
+
+    <update id="updateByName">
+        update user set name = #{param1} where id = #{param2}
+    </update>
+
+    <update id="updateByAge">
+        update user set age = #{param1} where id = #{param2}
+    </update>
+
+    <update id="updateByInfo">
+        update user set info = #{param1} where id = #{param2}
+    </update>
+
+    <update id="updateByPwd">
+        update user set pwd = #{param1} where id = #{param2}
+    </update>
+
+    <select id="selectAllById" resultType="com.shiyi.dao.UserDao">
+        select * from user where id = #{id}
+    </select>
+
+    <select id="selectAllByPhone" resultType="com.shiyi.dao.UserDao">
+        select * from user where phone = #{phone}
+    </select>
+
+    <select id="isById" resultType="java.lang.Boolean">
+        select id from user where id = #{id}
+    </select>
+
+
+</mapper>
+
