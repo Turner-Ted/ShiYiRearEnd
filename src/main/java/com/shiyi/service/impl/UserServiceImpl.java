@@ -25,11 +25,11 @@ public class UserServiceImpl implements UserService {
         }
 
         String id;
-        boolean b;
+        String b;
         do {
             id = 1 + String.format("%05d", new Random().nextInt(99999));
             b = mapper.isById(id);
-        }while (b);
+        }while (b != null);
 
         user.setId(id);
         mapper.saveAll(user);
@@ -50,11 +50,11 @@ public class UserServiceImpl implements UserService {
         }
 
         String id;
-        boolean b;
+        String b;
         do {
             id = 1 + String.format("%05d", new Random().nextInt(99999));
             b = mapper.isById(id);
-        }while (b);
+        }while (b != null);
 
         user.setId(id);
 

@@ -35,6 +35,7 @@ public class UserController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public void saveUserByRegister(@RequestBody UserDao user, HttpServletResponse response) throws IOException {
 
+        System.out.println(new Gson().toJson(user));
         if (service.saveUserByRegister(user)){
             response.getWriter().println("true");
         }else {

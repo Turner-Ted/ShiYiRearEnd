@@ -40,7 +40,7 @@
         select * from user where phone = #{phone}
     </select>
 
-    <select id="isById" resultType="java.lang.Boolean">
+    <select id="isById" resultType="java.lang.String">
         select id from user where id = #{id}
     </select>
 

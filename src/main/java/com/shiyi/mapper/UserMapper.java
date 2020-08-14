@@ -22,6 +22,6 @@ public interface UserMapper {
 
     public UserDao selectAllByPhone(String phone);
 
-    public boolean isById(String id);
+    public String isById(String id);
 
 }
