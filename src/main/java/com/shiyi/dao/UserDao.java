@@ -8,6 +8,7 @@ public class UserDao {
     private String age;
     private String avatar;
     private String pwd;
+    private String info;
 
     public String getId() {
         return id;
@@ -57,15 +58,11 @@ public class UserDao {
         this.pwd = pwd;
     }
 
-    @Override
-    public String toString() {
-        return "UserDao{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", age='" + age + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", pwd='" + pwd + '\'' +
-                '}';
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-public class DynamicService implements com.shiyi.service.DynamicService {
+public class DynamicServiceImpl implements com.shiyi.service.DynamicService {
 
     @Autowired
     DynamicMapper mapper;
@@ -54,7 +54,11 @@ public class DynamicService implements com.shiyi.service.DynamicService {
 
     @Override
     public List<DynamicDao> selectDynamicByUserId(String userId) {
-        return mapper.selectByUserId(userId);
+        List<DynamicDao> dynamics = mapper.selectByUserId(userId);
+        for (DynamicDao d : dynamics){
+            d.setUser(userService.selectUserAllById(d.getUserId()));
+        }
+        return dynamics;
     }
 
     @Override

@@ -16,7 +16,7 @@
     </select>
 
     <select id="selectByUserId" resultType="com.shiyi.dao.DynamicDao">
-        select * from dynamic order by time desc where userId = #{userId}
+        select * from dynamic where userId = #{userId} order by time desc
     </select>
 
     <select id="selectUserIdById" resultType="java.lang.String">

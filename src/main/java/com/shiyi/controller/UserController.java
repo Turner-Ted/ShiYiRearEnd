@@ -5,14 +5,14 @@ import com.shiyi.dao.UserDao;
 import com.shiyi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -55,15 +55,46 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/update/avatar")
-    public void updateUserByAvatar(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping(value = "/update/avatar", method = RequestMethod.POST)
+    public void updateUserByAvatar(@RequestParam("avatar") MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws IOException {
         String id = request.getParameter("id");
-        String avatar = request.getParameter("value");
-        if (id == null || avatar == null){
-            return;
+        System.out.println(id);
+        String filePath = "/img/user";// 保存图片的路径
+        // String filePath = "/image";//保存图片的路径
+        // 获取原始图片的拓展名
+        String originalFilename = file.getOriginalFilename();
+        System.out.println("originalFilename: " + originalFilename);
+        // 新的文件名字
+        String newFileName = UUID.randomUUID() + originalFilename;
+        // 封装上传文件位置的全路径
+        filePath += "/" + id;
+        System.out.println("filePath: " + filePath);
+        File targetFile = new File(filePath, newFileName);
+        if (!targetFile.exists()) {
+            targetFile.mkdirs();
         }
-        if (service.updateUserByAvatar(avatar, id)){
-            response.getWriter().println("true");
+        // 把本地文件上传到封装上传文件位置的全路径
+        System.out.println("newFileName: " + newFileName);
+
+        System.out.println("targetFile: " + targetFile.getName());
+        System.out.println("id: " + id);
+        //System.out.println("afterPhone");
+        try {
+            file.transferTo(targetFile);
+        } catch (IllegalStateException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        String allPath=filePath + "/" + id+ "/" + newFileName;
+        System.out.println("存储路径为"+allPath);
+        boolean result=service.updateUserByAvatar(allPath, id);//存在数据库中，其中allPath的数据库类型为varchar(1000)
+        if (result){
+
+        }else {
+            response.getWriter().println("false");
         }
     }
 

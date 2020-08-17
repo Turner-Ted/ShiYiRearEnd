@@ -34,10 +34,17 @@ public class DynamicController {
     }
 
     @RequestMapping(value = "show")
-    public void getDynamicAll(HttpServletResponse response) throws IOException {
+    public void getDynamicAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");
-        List<DynamicDao> dynamics = service.selectAllDynamic();
-        response.getWriter().println(new Gson().toJson(dynamics));
+
+        String id = request.getParameter("id");
+        if (id == null || id.equals("000000")){
+            List<DynamicDao> dynamics = service.selectAllDynamic();
+            response.getWriter().println(new Gson().toJson(dynamics));
+        }else {
+            List<DynamicDao> dynamics = service.selectDynamicByUserId(id);
+            response.getWriter().println(new Gson().toJson(dynamics));
+        }
     }
 
     @RequestMapping(value = "delete")
