@@ -7,7 +7,7 @@
     </insert>
 
     <select id="findAll" resultType="com.shiyi.dao.CategoryDao">
-        select * from category
+        select * from category order by id
     </select>
 
 

@@ -28,6 +28,12 @@ public class CategoryController {
         for (CategoryDao dao : daos){
             dao.setList(textBookService.findByTypeTextBook(dao.getName()));
         }
+        for (int i = daos.size() - 1; i >= 0; --i) {
+            if (daos.get(i).getList().size() == 0){
+                daos.remove(i);
+            }
+
+        }
         Gson gson = new Gson();
         String jsonCategory = gson.toJson(daos);
         System.out.println("-----------"+jsonCategory);
